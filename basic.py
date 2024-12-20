@@ -1,3 +1,6 @@
+import random
+
+
 
 class player:
     def __init__(self):
@@ -26,15 +29,29 @@ class player:
 
 
 class enemy:
-    def __init__(self,hp,atk):
+    def __init__(self,hp,atk,drop_rate):
         self.hp=hp
         self.atk=atk
+        self.drop=drop_rate
     
     def attack(self,player):
         if player.hp<self.atk:
             return False
         else:
             player.hp-=self.atk
+            iteam=random.randint(1,self.drop)
+            if iteam==1:
+                player.hp+=(10+(self.drop/2))
+                return "You get HP boost"
+            elif iteam==2:
+                player.power+=(5+(self.drop/2))
+                return "You get Power boost"
+            elif iteam==3:
+                player.hp+=20
+                player.power+=10
+                return "You get +20 HP And +10 Power boost"
+            else:
+                return "You get nothing :("
     
     def hp_checker(self):
         if self.hp<0:
@@ -43,7 +60,11 @@ class enemy:
 
 
 rohit=player()
-e1=enemy(10,0)
+e1=enemy(100,10,5)
+
+
+
+
 while True:
     if rohit.hp_checker()==False:
             print("you lose")
@@ -52,20 +73,31 @@ while True:
         print("You win")
         break
     else:
-        a=int(input("Enter choice  "))
+        a=int(input(" 1 to punch , 2 for kick  Enter choice  "))
         if a==1:
             if rohit.punch(e1)==False:
-                print("not enough power ")
+                print("Not Enough Power")
             else:
                 rohit.punch(e1)
-                e1.attack(rohit)
-                print(f" hp {rohit.hp} left")
-                print(f"ur Power is {rohit.power} ")
-                print(f"Enemy hp is {e1.hp} left")
+                iteam=e1.attack(rohit)
+                print(iteam)
+                print("------- You-------")
+                print(f"HP :{rohit.hp} ")
+                print(f"Power:  {rohit.power} \n")
+                print("------- Enemy -------")
+                print(f"HP : {e1.hp} \n")
         
         else:
-            rohit.kick(e1)
-            e1.attack(rohit)
-            print(f"our hp is {rohit.hp} left")
-            print(f"Enemy hp is {e1.hp} left")
+            if rohit.kick(e1)==False:
+                print("Not Enough Power")
+            else:
+                rohit.kick(e1)
+                iteam=e1.attack(rohit)
+                print(iteam)
+                print("------- You-------")
+                print(f"HP : {rohit.hp}")
+                print(f"Power:  {rohit.power} \n")
+                print("------- Enemy -------")
+                print(f"HP : {e1.hp}\n")
         
+
