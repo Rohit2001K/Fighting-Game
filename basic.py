@@ -1,11 +1,12 @@
 import random
-
+import tkinter
+from tkinter import *
 
 
 class player:
     def __init__(self):
         self.hp=100
-        self.power=100
+        self.power=1000
         self.defence=0
     
     def punch(self,enemy):
@@ -29,10 +30,11 @@ class player:
 
 
 class enemy:
-    def __init__(self,hp,atk,drop_rate):
-        self.hp=hp
-        self.atk=atk
-        self.drop=drop_rate
+    def __init__(self,level):
+        self.level=level
+        self.hp=100+level
+        self.atk=5+level
+        self.drop=1+level
     
     def attack(self,player):
         if player.hp<self.atk:
@@ -60,9 +62,7 @@ class enemy:
 
 
 rohit=player()
-e1=enemy(100,10,5)
-
-
+e1=enemy(1)
 
 
 while True:
@@ -71,7 +71,8 @@ while True:
             break
     elif e1.hp_checker()==False:
         print("You win")
-        break
+        e1.level+=1
+        e1=enemy(e1.level)
     else:
         a=int(input(" 1 to punch , 2 for kick  Enter choice  "))
         if a==1:
@@ -100,4 +101,5 @@ while True:
                 print("------- Enemy -------")
                 print(f"HP : {e1.hp}\n")
         
+
 
