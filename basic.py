@@ -1,6 +1,5 @@
 import random
-import tkinter
-from tkinter import *
+
 
 
 class player:
@@ -64,6 +63,7 @@ class enemy:
 rohit=player()
 e1=enemy(1)
 
+'''
 
 while True:
     if rohit.hp_checker()==False:
@@ -102,4 +102,4 @@ while True:
                 print(f"HP : {e1.hp}\n")
         
 
-
+'''
