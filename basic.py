@@ -5,7 +5,7 @@ import random
 class player:
     def __init__(self):
         self.hp=100
-        self.power=1000
+        self.power=10
         self.defence=0
     
     def punch(self,enemy):
@@ -31,8 +31,8 @@ class player:
 class enemy:
     def __init__(self,level):
         self.level=level
-        self.hp=100+level
-        self.atk=5+level
+        self.hp=100*level
+        self.atk=5+(level*level)
         self.drop=1+level
     
     def attack(self,player):
